@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://dl0ul3t5cbxpa"]
+
+[ext_resource type="Script" uid="uid://m0hua2546bnp" path="res://entity/fox.gd" id="1_kpck0"]
+[ext_resource type="Texture2D" uid="uid://i6c7r1hovlgl" path="res://sprite/ForestAnimals/FoxSoftColors.png" id="2_k0xb2"]
+
+[sub_resource type="Animation" id="Animation_kpck0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k0xb2"]
+resource_name = "die"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_rxxu0"]
+resource_name = "fight"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_wyljk"]
+resource_name = "gather"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_slltw"]
+resource_name = "idle"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_somxj"]
+resource_name = "rest"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_pcpmy"]
+resource_name = "running"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_slltw"]
+_data = {
+&"RESET": SubResource("Animation_kpck0"),
+&"die": SubResource("Animation_k0xb2"),
+&"fight": SubResource("Animation_rxxu0"),
+&"gather": SubResource("Animation_wyljk"),
+&"idle": SubResource("Animation_slltw"),
+&"rest": SubResource("Animation_somxj"),
+&"running": SubResource("Animation_pcpmy")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpck0"]
+size = Vector2(14, 5)
+
+[node name="Fox" type="CharacterBody2D" unique_id=262196930]
+script = ExtResource("1_kpck0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2021168455]
+libraries/ = SubResource("AnimationLibrary_slltw")
+speed_scale = 0.4
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1537305148]
+position = Vector2(0, -16)
+texture = ExtResource("2_k0xb2")
+hframes = 10
+vframes = 8
+frame = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1084630122]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_kpck0")

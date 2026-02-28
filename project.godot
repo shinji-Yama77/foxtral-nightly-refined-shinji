@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="voxtral-api"
+run/main_scene="uid://u5wy5xnjtx7x"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[audio]
+
+driver/enable_input=true
+
+[autoload]
+
+LlmManager="*uid://dhx74eh35a6ud"
+EntityManager="*uid://bx17ne0k5crno"
+ResourceManager="*uid://cu1itj82ek7ax"
+TokenManager="*uid://can8roa7g1jms"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
