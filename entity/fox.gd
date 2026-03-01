@@ -69,7 +69,7 @@ class TaskRest:
 				
 				moving_timer.start()
 				
-				moving_timer.timeout.connect(func():moving=false)
+				moving_timer.timeout.connect(func():moving=false;moving_timer.queue_free())
 				moving_direction= Vector2(randf_range(-1,1),randf_range(-1,1))
 				moving_direction = moving_direction/moving_direction.length()
 			
