@@ -7,6 +7,8 @@ class_name Fox
 
 @export var primary_name:String =""
 @export var speed = 30
+@export var body_color: Color = Color(1, 1, 1, 1)
+
 const random_moving_time = 3
 
 const Token: PackedScene = preload("res://entity/resource_token.tscn")
@@ -217,6 +219,13 @@ func _ready() -> void:
 	animation_player.play("idle")
 	EntityManager.register_fox(self)
 	nametag.text = primary_name
+	
+	var mat = ShaderMaterial.new()
+	mat.shader = load("res://entity/fox_color.gdshader")
+	mat.set_shader_parameter("body_color", body_color)
+	animation_sprite.material = mat
+
+
 
 	hunger_sprite = Sprite2D.new()
 	hunger_sprite.texture = load("res://sprite/FruitsVegetables/Fruits.png")
