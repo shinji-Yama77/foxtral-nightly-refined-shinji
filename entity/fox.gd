@@ -23,7 +23,7 @@ var tiredness:float = 0.0
 var obediance:float = 0.25
 @onready var hungryness:float = randf_range(0,0.25)
 
-const HUNGER_RATE = 0.01
+const HUNGER_RATE = 0.0025
 const HUNGER_THRESHOLD = 1.0
 const HUNGER_SHOW_THRESHOLD = 0.5
 const FRUIT_SIZE = 32
