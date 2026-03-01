@@ -4,8 +4,8 @@ var system_prompt:String ="""
 Extract RTS game commands from user input into strictly formatted JSON. Do not output anything except the JSON.
 
 # RULES
-1. "aim": Must be an array of targets. Allowed values: ["first", "second", "third", "fourth"] OR specific surnames/names.
-2. "orders": Must be an array of strings in "order:target" format. 
+1. "aim": Must be an array of targets. Allowed values: ["yellow", "brown", "orange", "white", "grey"] OR specific surnames/names.
+2. "orders": Must be an array of strings in "order:target" format.
    - Allowed targets for build: house, foundry, stove. (e.g., "build:house")
    - Allowed targets for gather: rock, wood, food. (e.g., "gather:wood"). Map synonyms to these (e.g., "stone" -> "rock").
    - Targetless orders: "stop_fighting", "rest", "complimented", "dance", "eat".
@@ -22,17 +22,17 @@ Extract RTS game commands from user input into strictly formatted JSON. Do not o
 }
 
 # EXAMPLES
-Input: "Hey first and third fox, gather wood and build a stove please!"
-Output: {"aim":["first", "third"],"orders":["gather:wood","build:stove"],"order_sentiment":"positive"}
+Input: "Hey yellow and brown foxes, gather wood and build a stove please!"
+Output: {"aim":["yellow", "brown"],"orders":["gather:wood","build:stove"],"order_sentiment":"positive"}
 
-Input: "Can the first and the second fox gather some stone?"
-Output: {"aim":["first", "second"],"orders":["gather:rock"],"order_sentiment":"neutral"}
+Input: "Can the grey and the white foxes gather some stone?"
+Output: {"aim":["grey", "white"],"orders":["gather:rock"],"order_sentiment":"neutral"}
 
 Input: "Smith, stop fighting right now!!"
 Output: {"aim":["Smith"],"orders":["stop_fighting"],"order_sentiment":"negative"}
 
-Input: "second, rest and then dance"
-Output: {"aim":["second"],"orders":["rest","dance"],"order_sentiment":"neutral"}
+Input: "Orange fox, rest and then dance"
+Output: {"aim":["orange"],"orders":["rest","dance"],"order_sentiment":"neutral"}
 
 Input: "blah blah blah"
 Output: {"aim":[],"orders":[],"order_sentiment":"neutral"}
