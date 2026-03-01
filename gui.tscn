@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7mcsqbxiw321"]
 
-[ext_resource type="Script" path="res://gui.gd" id="1_6lon5"]
+[ext_resource type="Script" uid="uid://jf6fywnq218d" path="res://gui.gd" id="1_6lon5"]
 [ext_resource type="Theme" uid="uid://6a3t6mbsq2ng" path="res://font/main_theme.tres" id="2_q8o8l"]
 
 [node name="Gui" type="Control" unique_id=1391388388]
