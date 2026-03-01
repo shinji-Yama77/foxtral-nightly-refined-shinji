@@ -20,13 +20,14 @@ text = "press to TALK
 \"space\""
 
 [node name="Caption" type="Label" parent="CanvasLayer" unique_id=2009201721]
-offset_left = 116.0
+offset_left = 65.0
 offset_top = 145.0
-offset_right = 300.0
+offset_right = 307.0
 offset_bottom = 170.0
 theme = ExtResource("2_q8o8l")
 text = "test"
-horizontal_alignment = 1
+horizontal_alignment = 2
+vertical_alignment = 2
 autowrap_mode = 3
 
 [node name="ResourcesLabel" type="Label" parent="CanvasLayer" unique_id=2140451689]
