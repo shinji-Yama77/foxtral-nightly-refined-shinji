@@ -3,13 +3,14 @@ class_name MainGUI
 
 @onready var caption = $CanvasLayer/Caption
 @onready var talk_button = $CanvasLayer/TalkButton
-@onready var resources_values = $CanvasLayer/ResourcesValues
+@onready var wood_value = $CanvasLayer/Inventory/WoodRow/WoodValue
+@onready var rock_value = $CanvasLayer/Inventory/RocksRow/RockValue
+@onready var eggs_value = $CanvasLayer/Inventory/EggsRow/EggsValue
 
 signal talk_pressed
 signal talk_released
 
 func _ready() -> void:
-		
 	talk_button.button_down.connect(_on_talk_pressed)
 	talk_button.button_up.connect(_on_talk_released)
 	
@@ -33,8 +34,7 @@ func set_caption(text: String) -> void:
 	caption.text = text
 
 func _process(_delta: float) -> void:
-	if resources_values and is_instance_valid(TokenManager):
-		var wood = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.WOOD)
-		var rock = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.ROCK)
-		var eggs = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.FOOD)
-		resources_values.text = str(wood) + "\n" + str(rock) + "\n" + str(eggs)
+	if wood_value and is_instance_valid(TokenManager):
+		wood_value.text = str(TokenManager.get_resource_count(ResourcePoint.ResourcePointType.WOOD))
+		rock_value.text = str(TokenManager.get_resource_count(ResourcePoint.ResourcePointType.ROCK))
+		eggs_value.text = str(TokenManager.get_resource_count(ResourcePoint.ResourcePointType.FOOD))
