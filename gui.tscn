@@ -2,6 +2,29 @@
 
 [ext_resource type="Script" uid="uid://jf6fywnq218d" path="res://gui.gd" id="1_6lon5"]
 [ext_resource type="Theme" uid="uid://6a3t6mbsq2ng" path="res://font/main_theme.tres" id="2_q8o8l"]
+[ext_resource type="Texture2D" uid="uid://cv6mrm244rj3l" path="res://sprite/Decorations/Woods.png" id="3_wood"]
+[ext_resource type="Texture2D" uid="uid://byah2oqs3yxvw" path="res://sprite/Rocks/ClassicalRocks/Rock1.png" id="4_rock"]
+[ext_resource type="Texture2D" uid="uid://c441q0s7ttvhd" path="res://sprite/ForestAnimals/egg.png" id="5_egg"]
+[ext_resource type="Texture2D" uid="uid://7h6dsa2k4rry" path="res://sprite/house.png" id="6_house"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wood"]
+atlas = ExtResource("3_wood")
+region = Rect2(15, 4, 16, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_recipe"]
+bg_color = Color(0, 0, 0, 0.55)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
 
 [node name="Gui" type="Control" unique_id=1391388388]
 layout_mode = 3
@@ -10,11 +33,65 @@ script = ExtResource("1_6lon5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1330155264]
 
+[node name="RecipePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1122334455]
+offset_left = 55.0
+offset_top = 4.0
+offset_right = 265.0
+offset_bottom = 38.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_recipe")
+clip_contents = true
+
+[node name="RecipeBar" type="HBoxContainer" parent="CanvasLayer/RecipePanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="RecipeWoodQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "2×"
+
+[node name="RecipeWoodIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar"]
+custom_minimum_size = Vector2(20, 12)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wood")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RecipeRockQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "2×"
+
+[node name="RecipeRockIconWrap" type="MarginContainer" parent="CanvasLayer/RecipePanel/RecipeBar"]
+layout_mode = 2
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_bottom = 5
+
+[node name="RecipeRockIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar/RecipeRockIconWrap"]
+layout_mode = 2
+custom_minimum_size = Vector2(20, 20)
+texture = ExtResource("4_rock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RecipeEquals" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = " = "
+
+[node name="RecipeHouseIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("6_house")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="TalkButton" type="Button" parent="CanvasLayer" unique_id=1234567890]
 offset_left = 10.0
-offset_top = 9.0
+offset_top = 40.0
 offset_right = 101.0
-offset_bottom = 39.0
+offset_bottom = 70.0
 theme = ExtResource("2_q8o8l")
 text = "press to TALK
 \"space\""
@@ -29,20 +106,77 @@ text = "test"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="ResourcesLabel" type="Label" parent="CanvasLayer" unique_id=2140451689]
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer" unique_id=2233445566]
 offset_left = 2.0
-offset_top = 143.0
-offset_right = 40.0
-offset_bottom = 179.0
-text = "Wood:
-Rocks:
-Eggs:"
+offset_top = 118.0
+offset_right = 85.0
+offset_bottom = 178.0
+theme_override_constants/separation = 2
 
-[node name="ResourcesValues" type="Label" parent="CanvasLayer" unique_id=177586076]
-offset_left = 43.0
-offset_top = 143.0
-offset_right = 69.0
-offset_bottom = 179.0
-text = "0
-0
-0"
+[node name="WoodRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/Inventory/WoodRow"]
+custom_minimum_size = Vector2(16, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wood")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WoodLabel" type="Label" parent="CanvasLayer/Inventory/WoodRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "Wood:"
+
+[node name="WoodValue" type="Label" parent="CanvasLayer/Inventory/WoodRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "0"
+
+[node name="RocksRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RockIconWrap" type="MarginContainer" parent="CanvasLayer/Inventory/RocksRow"]
+layout_mode = 2
+theme_override_constants/margin_top = -5
+theme_override_constants/margin_bottom = 5
+
+[node name="RockIcon" type="TextureRect" parent="CanvasLayer/Inventory/RocksRow/RockIconWrap"]
+layout_mode = 2
+custom_minimum_size = Vector2(16, 16)
+texture = ExtResource("4_rock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RocksLabel" type="Label" parent="CanvasLayer/Inventory/RocksRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "Rocks:"
+
+[node name="RockValue" type="Label" parent="CanvasLayer/Inventory/RocksRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "0"
+
+[node name="EggsRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="EggIcon" type="TextureRect" parent="CanvasLayer/Inventory/EggsRow"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_egg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EggsLabel" type="Label" parent="CanvasLayer/Inventory/EggsRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "Eggs:"
+
+[node name="EggsValue" type="Label" parent="CanvasLayer/Inventory/EggsRow"]
+layout_mode = 2
+theme = ExtResource("2_q8o8l")
+text = "0"
