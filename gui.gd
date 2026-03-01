@@ -3,6 +3,7 @@ class_name MainGUI
 
 @onready var caption = $CanvasLayer/Caption
 @onready var talk_button = $CanvasLayer/TalkButton
+@onready var resources_values = $CanvasLayer/ResourcesValues
 
 signal talk_pressed
 signal talk_released
@@ -27,3 +28,10 @@ func _on_talk_released() -> void:
 
 func set_caption(text: String) -> void:
 	caption.text = text
+
+func _process(_delta: float) -> void:
+	if resources_values and is_instance_valid(TokenManager):
+		var wood = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.WOOD)
+		var rock = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.ROCK)
+		var eggs = TokenManager.get_resource_count(ResourcePoint.ResourcePointType.FOOD)
+		resources_values.text = str(wood) + "\n" + str(rock) + "\n" + str(eggs)
