@@ -521,7 +521,7 @@ resource_type = 2
 metadata/_custom_type_script = "uid://8owxvcvhuhmd"
 
 [node name="FoodPoint" type="Node2D" parent="." unique_id=792798627]
-position = Vector2(278, 29)
+position = Vector2(290, 101)
 script = ExtResource("8_5vw27")
 resource_type = 3
 metadata/_custom_type_script = "uid://8owxvcvhuhmd"
@@ -532,19 +532,19 @@ script = ExtResource("8_5vw27")
 metadata/_custom_type_script = "uid://8owxvcvhuhmd"
 
 [node name="Chicken" parent="." unique_id=952782131 instance=ExtResource("9_kek77")]
-position = Vector2(270, 32)
+position = Vector2(288, 89)
 
 [node name="Chicken2" parent="." unique_id=17281212 instance=ExtResource("9_kek77")]
-position = Vector2(289, 26)
+position = Vector2(307, 83)
 
 [node name="Chicken3" parent="." unique_id=935724110 instance=ExtResource("9_kek77")]
-position = Vector2(282, 47)
+position = Vector2(300, 104)
 
 [node name="Chicken4" parent="." unique_id=607639906 instance=ExtResource("9_kek77")]
-position = Vector2(244, 24)
+position = Vector2(262, 81)
 
 [node name="Chicken5" parent="." unique_id=345738391 instance=ExtResource("9_kek77")]
-position = Vector2(246, 54)
+position = Vector2(264, 111)
 
 [node name="Chicken6" parent="." unique_id=758286615 instance=ExtResource("9_kek77")]
-position = Vector2(311, 32)
+position = Vector2(329, 89)

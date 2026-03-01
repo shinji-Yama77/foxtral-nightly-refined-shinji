@@ -7,24 +7,20 @@
 [ext_resource type="Texture2D" uid="uid://c441q0s7ttvhd" path="res://sprite/ForestAnimals/egg.png" id="5_egg"]
 [ext_resource type="Texture2D" uid="uid://7h6dsa2k4rry" path="res://sprite/house.png" id="6_house"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wood"]
-atlas = ExtResource("3_wood")
-region = Rect2(15, 4, 16, 5)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_recipe"]
-bg_color = Color(0, 0, 0, 0.55)
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.23921569)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wood"]
+atlas = ExtResource("3_wood")
+region = Rect2(15, 4, 16, 5)
 
 [node name="Gui" type="Control" unique_id=1391388388]
 layout_mode = 3
@@ -34,64 +30,67 @@ script = ExtResource("1_6lon5")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1330155264]
 
 [node name="RecipePanel" type="PanelContainer" parent="CanvasLayer" unique_id=1122334455]
-offset_left = 55.0
-offset_top = 4.0
-offset_right = 265.0
-offset_bottom = 38.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_recipe")
 clip_contents = true
+offset_left = 149.0
+offset_top = 2.0
+offset_right = 317.0
+offset_bottom = 33.0
+theme = ExtResource("2_q8o8l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_recipe")
 
-[node name="RecipeBar" type="HBoxContainer" parent="CanvasLayer/RecipePanel"]
+[node name="RecipeBar" type="HBoxContainer" parent="CanvasLayer/RecipePanel" unique_id=450540040]
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="RecipeWoodQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+[node name="RecipeWoodQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=882687464]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "2×"
 
-[node name="RecipeWoodIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar"]
+[node name="RecipeWoodIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=1429639439]
 custom_minimum_size = Vector2(20, 12)
 layout_mode = 2
 texture = SubResource("AtlasTexture_wood")
-expand_mode = 1
 stretch_mode = 5
 
-[node name="RecipeRockQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+[node name="RecipeRockQty" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=569980098]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "2×"
 
-[node name="RecipeRockIconWrap" type="MarginContainer" parent="CanvasLayer/RecipePanel/RecipeBar"]
+[node name="RecipeRockIconWrap" type="MarginContainer" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=179729184]
 layout_mode = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = 5
 
-[node name="RecipeRockIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar/RecipeRockIconWrap"]
-layout_mode = 2
+[node name="RecipeRockIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar/RecipeRockIconWrap" unique_id=1853336735]
 custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
 texture = ExtResource("4_rock")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RecipeEquals" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar"]
+[node name="RecipeEquals" type="Label" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=785811320]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = " = "
 
-[node name="RecipeHouseIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar"]
-custom_minimum_size = Vector2(80, 80)
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/RecipePanel/RecipeBar" unique_id=300464278]
+layout_mode = 2
+
+[node name="RecipeHouseIcon" type="TextureRect" parent="CanvasLayer/RecipePanel/RecipeBar/MarginContainer" unique_id=659539134]
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 texture = ExtResource("6_house")
-expand_mode = 1
-stretch_mode = 5
+expand_mode = 4
+stretch_mode = 6
 
 [node name="TalkButton" type="Button" parent="CanvasLayer" unique_id=1234567890]
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 101.0
-offset_bottom = 70.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 97.0
+offset_bottom = 36.0
 theme = ExtResource("2_q8o8l")
 text = "press to TALK
 \"space\""
@@ -107,77 +106,77 @@ horizontal_alignment = 2
 vertical_alignment = 2
 autowrap_mode = 3
 
-[node name="Inventory" type="VBoxContainer" parent="CanvasLayer" unique_id=2233445566]
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer" unique_id=-2061521730]
 offset_left = 2.0
-offset_top = 118.0
-offset_right = 85.0
+offset_top = 128.0
+offset_right = 80.0
 offset_bottom = 178.0
 theme_override_constants/separation = 2
 
-[node name="WoodRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+[node name="WoodRow" type="HBoxContainer" parent="CanvasLayer/Inventory" unique_id=1666267686]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/Inventory/WoodRow"]
+[node name="WoodIcon" type="TextureRect" parent="CanvasLayer/Inventory/WoodRow" unique_id=1243820759]
 custom_minimum_size = Vector2(16, 10)
 layout_mode = 2
 texture = SubResource("AtlasTexture_wood")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WoodLabel" type="Label" parent="CanvasLayer/Inventory/WoodRow"]
+[node name="WoodLabel" type="Label" parent="CanvasLayer/Inventory/WoodRow" unique_id=831227793]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "Wood:"
 
-[node name="WoodValue" type="Label" parent="CanvasLayer/Inventory/WoodRow"]
+[node name="WoodValue" type="Label" parent="CanvasLayer/Inventory/WoodRow" unique_id=457312423]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "0"
 
-[node name="RocksRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+[node name="RocksRow" type="HBoxContainer" parent="CanvasLayer/Inventory" unique_id=657342491]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="RockIconWrap" type="MarginContainer" parent="CanvasLayer/Inventory/RocksRow"]
+[node name="RockIconWrap" type="MarginContainer" parent="CanvasLayer/Inventory/RocksRow" unique_id=1096751191]
 layout_mode = 2
 theme_override_constants/margin_top = -5
 theme_override_constants/margin_bottom = 5
 
-[node name="RockIcon" type="TextureRect" parent="CanvasLayer/Inventory/RocksRow/RockIconWrap"]
-layout_mode = 2
+[node name="RockIcon" type="TextureRect" parent="CanvasLayer/Inventory/RocksRow/RockIconWrap" unique_id=2095374666]
 custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
 texture = ExtResource("4_rock")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RocksLabel" type="Label" parent="CanvasLayer/Inventory/RocksRow"]
+[node name="RocksLabel" type="Label" parent="CanvasLayer/Inventory/RocksRow" unique_id=556761970]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "Rocks:"
 
-[node name="RockValue" type="Label" parent="CanvasLayer/Inventory/RocksRow"]
+[node name="RockValue" type="Label" parent="CanvasLayer/Inventory/RocksRow" unique_id=413228843]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "0"
 
-[node name="EggsRow" type="HBoxContainer" parent="CanvasLayer/Inventory"]
+[node name="EggsRow" type="HBoxContainer" parent="CanvasLayer/Inventory" unique_id=667378855]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="EggIcon" type="TextureRect" parent="CanvasLayer/Inventory/EggsRow"]
+[node name="EggIcon" type="TextureRect" parent="CanvasLayer/Inventory/EggsRow" unique_id=1319397114]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 texture = ExtResource("5_egg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="EggsLabel" type="Label" parent="CanvasLayer/Inventory/EggsRow"]
+[node name="EggsLabel" type="Label" parent="CanvasLayer/Inventory/EggsRow" unique_id=1439487760]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "Eggs:"
 
-[node name="EggsValue" type="Label" parent="CanvasLayer/Inventory/EggsRow"]
+[node name="EggsValue" type="Label" parent="CanvasLayer/Inventory/EggsRow" unique_id=1209892832]
 layout_mode = 2
 theme = ExtResource("2_q8o8l")
 text = "0"

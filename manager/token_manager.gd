@@ -33,3 +33,11 @@ func get_resource_count(type: ResourcePoint.ResourcePointType) -> int:
 			if is_instance_valid(parent) and not parent is Fox:
 				count += 1
 	return count
+
+func get_token(resource_type: ResourcePoint.ResourcePointType) -> ResourceToken:
+	for t in token_list:
+		if is_instance_valid(t) and t.resource_type == resource_type:
+			var parent = t.get_parent()
+			if is_instance_valid(parent) and not parent is Fox:
+				return t
+	return null

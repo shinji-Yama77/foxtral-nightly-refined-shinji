@@ -21,7 +21,7 @@ var secondary_name:String = ""
 var happyness:float = 0.75
 var tiredness:float = 0.0
 var obediance:float = 0.25
-var hungryness:float = 0.0
+@onready var hungryness:float = randf_range(0,0.25)
 
 const HUNGER_RATE = 0.01
 const HUNGER_THRESHOLD = 1.0
@@ -158,21 +158,23 @@ class TaskGather:
 class TaskEat:
 	extends Task
 
-	var house: ResourcePoint = ResourceManager.select_resource_by_name("house")
+	var food_token: ResourceToken
 	var target_position: Vector2
 
 	func _init():
 		type = TaskType.EAT
-		target_position = house.get_position() + Vector2(randf_range(-1,1), randf_range(-1,1)) * gather_area
+		food_token = TokenManager.get_token(ResourcePoint.ResourcePointType.FOOD)
 
 	func process(fox: Fox) -> bool:
+		if not food_token or not is_instance_valid(food_token):
+			return true
+		
+		target_position = food_token.global_position
 		fox.velocity = fox.get_position().direction_to(target_position) * fox.speed
 
 		if (fox.get_position() - target_position).length() < 5:
 			if TokenManager.try_consume(ResourcePoint.ResourcePointType.FOOD, 1):
 				fox.hungryness = 0.0
-			else:
-				GuiManager.change_caption(fox.primary_name + " is hungry but there's no food at the house!")
 			return true
 
 		return false
