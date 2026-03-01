@@ -23,7 +23,7 @@ var tiredness:float = 0.0
 var obediance:float = 0.25
 @onready var hungryness:float = randf_range(0,0.25)
 
-const HUNGER_RATE = 0.01
+const HUNGER_RATE = 0.0025
 const HUNGER_THRESHOLD = 1.0
 const HUNGER_SHOW_THRESHOLD = 0.5
 const FRUIT_SIZE = 32
@@ -33,6 +33,9 @@ const FRUIT_ROWS = 3
 var hunger_sprite: Sprite2D
 
 var mouse_pos:Vector2
+
+var _is_mic_enabled: bool = false
+var _alive_timer: float = 0.0
 
 enum TaskType{
 	GATHER,
@@ -69,7 +72,7 @@ class TaskRest:
 				
 				moving_timer.start()
 				
-				moving_timer.timeout.connect(func():moving=false)
+				moving_timer.timeout.connect(func():moving=false;moving_timer.queue_free())
 				moving_direction= Vector2(randf_range(-1,1),randf_range(-1,1))
 				moving_direction = moving_direction/moving_direction.length()
 			
@@ -232,10 +235,33 @@ func _ready() -> void:
 	hunger_sprite = Sprite2D.new()
 	hunger_sprite.texture = load("res://sprite/FruitsVegetables/Fruits.png")
 	hunger_sprite.region_enabled = true
-	hunger_sprite.position = Vector2(0, -35)
+	hunger_sprite.position = Vector2(16, -8)
 	hunger_sprite.scale = Vector2(0.5, 0.5)
 	hunger_sprite.visible = false
 	add_child(hunger_sprite)
+	
+	if GuiManager != null:
+		if not GuiManager.is_node_ready():
+			await GuiManager.ready
+		if GuiManager.gui_scene != null:
+			GuiManager.gui_scene.talk_pressed.connect(_on_talk_start)
+			GuiManager.gui_scene.talk_released.connect(_on_talk_stop)
+
+func _on_talk_start() -> void:
+	_is_mic_enabled = true
+
+func _on_talk_stop() -> void:
+	_is_mic_enabled = false
+
+func _process(delta: float) -> void:
+	_alive_timer += delta
+	var target_alpha: float = 0.0
+	if _alive_timer < 5.0 or _is_mic_enabled:
+		target_alpha = 1.0
+	
+	var current_alpha = nametag.modulate.a
+	if current_alpha != target_alpha:
+		nametag.modulate.a = move_toward(current_alpha, target_alpha, delta)
 
 func _pick_random_fruit() -> void:
 	var col = randi() % FRUIT_COLS
@@ -278,4 +304,7 @@ func _physics_process(delta: float) -> void:
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		velocity += collision.get_normal() * speed * 0.5
+		
+	position.x = clamp(position.x, 16, 304)
+	position.y = clamp(position.y, 32, 164)
 		
