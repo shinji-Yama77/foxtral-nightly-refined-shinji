@@ -409,23 +409,28 @@ y_sort_enabled = true
 
 [node name="ThirdFox" parent="." unique_id=228751058 instance=ExtResource("1_ig7tw")]
 position = Vector2(166.87378, 110.84993)
-primary_name = "third"
 speed = 60
+body_color = Color(1.8, 1.8, 1.8, 1)
 
 [node name="FourthFox" parent="." unique_id=845217908 instance=ExtResource("1_ig7tw")]
 position = Vector2(121.17398, 59.68601)
-primary_name = "fourth"
 speed = 60
+body_color = Color(1.2, 0.6, 0.1, 1)
 
 [node name="SecondFox" parent="." unique_id=1440442275 instance=ExtResource("1_ig7tw")]
 position = Vector2(141.04346, 124.75856)
-primary_name = "second"
 speed = 60
+body_color = Color(0.9, 0.85, 0.75, 1)
 
 [node name="FirstFox" parent="." unique_id=1764837370 instance=ExtResource("1_ig7tw")]
 position = Vector2(110.22, 95.205)
-primary_name = "first"
 speed = 60
+body_color = Color(0.6, 0.35, 0.1, 1)
+
+[node name="FifthFox" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(140.0, 90.0)
+speed = 60
+body_color = Color(1.2, 1.1, 0.0, 1)
 
 [node name="upper_layer" type="TileMapLayer" parent="." unique_id=210149424]
 z_index = -2
