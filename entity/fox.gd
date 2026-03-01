@@ -19,14 +19,24 @@ var secondary_name:String = ""
 var happyness:float = 0.75
 var tiredness:float = 0.0
 var obediance:float = 0.25
-var hungryness:float = 0.0 
+var hungryness:float = 0.0
+
+const HUNGER_RATE = 0.01
+const HUNGER_THRESHOLD = 1.0
+const HUNGER_SHOW_THRESHOLD = 0.5
+const FRUIT_SIZE = 32
+const FRUIT_COLS = 4
+const FRUIT_ROWS = 3
+
+var hunger_sprite: Sprite2D
 
 var mouse_pos:Vector2
 
 enum TaskType{
 	GATHER,
 	BUILD,
-	REST
+	REST,
+	EAT
 }
 
 @abstract class Task:
@@ -143,6 +153,28 @@ class TaskGather:
 		
 		return false
 
+class TaskEat:
+	extends Task
+
+	var house: ResourcePoint = ResourceManager.select_resource_by_name("house")
+	var target_position: Vector2
+
+	func _init():
+		type = TaskType.EAT
+		target_position = house.get_position() + Vector2(randf_range(-1,1), randf_range(-1,1)) * gather_area
+
+	func process(fox: Fox) -> bool:
+		fox.velocity = fox.get_position().direction_to(target_position) * fox.speed
+
+		if (fox.get_position() - target_position).length() < 5:
+			if TokenManager.try_consume(ResourcePoint.ResourcePointType.FOOD, 1):
+				fox.hungryness = 0.0
+			else:
+				GuiManager.change_caption(fox.primary_name + " is hungry but there's no food at the house!")
+			return true
+
+		return false
+
 var schedule:Array[Task] = [TaskRest.new()]
 
 func rename(new_name:String):
@@ -165,6 +197,8 @@ func compute_order(orders:Array[Order.SingleOrder]):
 				var build_order := order as Order.OrderBuild
 				if build_order != null:
 					schedule.insert(0, TaskBuild.new(build_order.building))
+			Order.OrderType.EAT:
+				schedule.insert(0, TaskEat.new())
 
 func flip(flip:bool):
 	
@@ -179,19 +213,41 @@ func rest():
 	schedule = [TaskRest.new()]
 	
 func _ready() -> void:
-	
+
 	animation_player.play("idle")
 	EntityManager.register_fox(self)
 	nametag.text = primary_name
 
+	hunger_sprite = Sprite2D.new()
+	hunger_sprite.texture = load("res://sprite/FruitsVegetables/Fruits.png")
+	hunger_sprite.region_enabled = true
+	hunger_sprite.position = Vector2(0, -35)
+	hunger_sprite.scale = Vector2(0.5, 0.5)
+	hunger_sprite.visible = false
+	add_child(hunger_sprite)
+
+func _pick_random_fruit() -> void:
+	var col = randi() % FRUIT_COLS
+	var row = randi() % FRUIT_ROWS
+	hunger_sprite.region_rect = Rect2(col * FRUIT_SIZE, row * FRUIT_SIZE, FRUIT_SIZE, FRUIT_SIZE)
+
 func _physics_process(delta: float) -> void:
-	
+
+	hungryness = minf(hungryness + HUNGER_RATE * delta, HUNGER_THRESHOLD)
+
+	var should_show = hungryness >= HUNGER_SHOW_THRESHOLD
+	if should_show and not hunger_sprite.visible:
+		_pick_random_fruit()
+	hunger_sprite.visible = should_show
+
 	velocity=Vector2()
-	
+
 	var actual_task = schedule[0]
-	
+
 	if actual_task.process(self):
 		schedule.pop_front()
+
+	velocity *= 1.0 - (hungryness * 0.7)
 		
 		
 	if velocity.length() >0 :

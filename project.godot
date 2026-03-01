@@ -25,8 +25,8 @@ LlmManager="*uid://dhx74eh35a6ud"
 EntityManager="*uid://bx17ne0k5crno"
 ResourceManager="*uid://cu1itj82ek7ax"
 TokenManager="*uid://can8roa7g1jms"
-BuildingManager="*uid://oc5uecl2qahp"
 GuiManager="*uid://blqenekophetm"
+BuildingManager="*uid://oc5uecl2qahp"
 
 [display]
 

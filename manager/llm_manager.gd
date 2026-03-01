@@ -8,7 +8,7 @@ Extract RTS game commands from user input into strictly formatted JSON. Do not o
 2. "orders": Must be an array of strings in "order:target" format. 
    - Allowed targets for build: house, foundry, stove. (e.g., "build:house")
    - Allowed targets for gather: rock, wood, food. (e.g., "gather:wood"). Map synonyms to these (e.g., "stone" -> "rock").
-   - Targetless orders: "stop_fighting", "rest", "complimented", "dance".
+   - Targetless orders: "stop_fighting", "rest", "complimented", "dance", "eat".
    - Rename order: "rename:[NewName]" (e.g., "rename:Todd")
 3. "order_sentiment": Must be exactly "positive" (contains please/polite), "negative" (urgent/aggressive/now), or "neutral".
 4. CRITICAL: ONLY extract orders explicitly mentioned in the text. Do NOT hallucinate or add extra resources (e.g., do not add wood/food if only rock is mentioned).

@@ -8,7 +8,8 @@ enum OrderType {
 	REST,
 	COMPLIMENTED,
 	DANCE,
-	RENAME
+	RENAME,
+	EAT
 }
 
 @abstract class SingleOrder:
@@ -46,10 +47,14 @@ class OrderDance extends SingleOrder:
 
 class OrderRename extends SingleOrder:
 	var new_name: String
-	
+
 	func _init(p_new_name: String) -> void:
 		order_type = OrderType.RENAME
 		new_name = p_new_name
+
+class OrderEat extends SingleOrder:
+	func _init() -> void:
+		order_type = OrderType.EAT
 
 enum OrderSentiment { POSITIVE, NEUTRAL, NEGATIVE }
 
@@ -91,5 +96,6 @@ static func _parse_order(s_order: String) -> SingleOrder:
 		"complimented": return OrderComplimented.new()
 		"dance": return OrderDance.new()
 		"rename": return OrderRename.new(args[1] if args.size() > 1 else "")
+		"eat": return OrderEat.new()
 		_: return null
 	
