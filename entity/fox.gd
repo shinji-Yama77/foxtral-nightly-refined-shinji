@@ -66,6 +66,33 @@ class TaskRest:
 			fox.velocity+=moving_direction*fox.speed/3
 			
 		return false
+
+class TaskBuild:
+	extends Task
+	
+	var building_id: String
+	var house: ResourcePoint
+	var house_position: Vector2
+	const build_distance: float = 10.0
+	
+	func _init(p_building_id: String):
+		type = TaskType.BUILD
+		building_id = p_building_id
+		house = ResourceManager.select_resource_by_name("house")
+		if house != null:
+			house_position = house.get_position() + Vector2(randf_range(-1, 1), randf_range(-1, 1)) * drop_scatter_radius
+		else:
+			house_position = Vector2.ZERO
+	
+	func process(fox: Fox) -> bool:
+		if house == null:
+			return true
+		var dist := (fox.get_position() - house_position).length()
+		if dist < build_distance:
+			BuildingManager.try_build(building_id)
+			return true
+		fox.velocity = fox.get_position().direction_to(house_position) * fox.speed
+		return false
 		
 class TaskGather:
 	extends Task
@@ -102,7 +129,6 @@ class TaskGather:
 				resource_token = Token.instantiate()
 				fox.add_child(resource_token)
 				resource_token.set_token_type(resource.resource_type)
-				TokenManager.register_token(resource_token)
 				
 				resource_token.position = fox.mouse_pos
 		else:
@@ -112,6 +138,7 @@ class TaskGather:
 			if (fox.get_position()-house_position).length()<5:
 
 				resource_token.reparent(fox.get_parent())
+				TokenManager.register_token(resource_token)
 				return true
 		
 		return false
@@ -134,6 +161,10 @@ func compute_order(orders:Array[Order.SingleOrder]):
 				
 			Order.OrderType.GATHER:
 				schedule.insert(0, TaskGather.new(order.resource, 1))
+			Order.OrderType.BUILD:
+				var build_order := order as Order.OrderBuild
+				if build_order != null:
+					schedule.insert(0, TaskBuild.new(build_order.building))
 
 func flip(flip:bool):
 	

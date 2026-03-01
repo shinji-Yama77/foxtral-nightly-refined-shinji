@@ -66,6 +66,8 @@ func _process(_delta):
 			var close_code = _ws.get_close_code()
 			var close_reason = _ws.get_close_reason()
 			print("WebSocket closed. Code: ", close_code, " Reason: ", close_reason)
+			if close_code == -1 or close_reason.is_empty():
+				print("  -> Handshake failed or connection dropped before proper close. Check: API key valid?, network/firewall, Mistral API status.")
 			
 			if _connected:
 				_connected = false

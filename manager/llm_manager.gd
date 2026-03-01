@@ -81,11 +81,11 @@ func _ready() -> void:
 	audio_capture.start_recording()
 	mistral_realtime_client.connect_to_mistral(_api_key)
 	
-	await GuiManager.ready
-
-	GuiManager.gui_scene.talk_pressed.connect(_on_talk_start)
-	GuiManager.gui_scene.talk_released.connect(_on_talk_stop)
-
+	if GuiManager != null:
+		await GuiManager.ready
+		GuiManager.gui_scene.talk_pressed.connect(_on_talk_start)
+		GuiManager.gui_scene.talk_released.connect(_on_talk_stop)
+	
 func _on_audio_chunk_ready(audio_data: PackedByteArray) -> void:
 	if is_recording:
 		mistral_realtime_client.send_audio(audio_data)
@@ -125,7 +125,8 @@ func _on_tts_ready(tts_text:String):
 	if sentence_parsed.length() > order_number_character:
 		sentence_parsed = sentence_parsed.substr(sentence_parsed.length() - order_number_character)
 	
-	GuiManager.change_caption(sentence_parsed)
+	if GuiManager != null:
+		GuiManager.change_caption(sentence_parsed)
 	
 func _on_llm_completion_received(response: Dictionary):
 	var content=response["choices"][0]["message"]["content"]
@@ -141,7 +142,8 @@ func _on_llm_completion_received(response: Dictionary):
 			
 			EntityManager.execute_order(new_order)
 			sentence_parsed = ""
-			GuiManager.change_caption("")
+			if GuiManager != null:
+				GuiManager.change_caption("")
 	
 	llm_available = true
 	
